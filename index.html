@@ -414,6 +414,39 @@
     </main>
 
 </div>
+<!-- Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+<script>
+    const SUPABASE_URL = "https://zyyolktijcesfvutdhhb.supabase.co";
+
+    // তোমার Supabase Settings → API Keys থেকে Publishable key বসাও
+    const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_q5pjAKLBylQTi-hht5OiRA_K0QCCWFa";
+
+    const supabaseClient = supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+    );
+
+    async function testSupabaseConnection() {
+
+        console.log("Connecting to Supabase...");
+
+        const { data, error } = await supabaseClient
+            .from("products")
+            .select("id")
+            .limit(1);
+
+        if (error) {
+            console.error("Supabase Error:", error);
+            return;
+        }
+
+        console.log("Supabase Connected Successfully!");
+        console.log("Products:", data);
+    }
+
+    testSupabaseConnection();
+</script>
 </body>
 </html>
