@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Wholesale Business System</title>
 
     <style>
+
         * {
             margin: 0;
             padding: 0;
@@ -19,12 +22,24 @@
             color: #1f2937;
         }
 
+        button,
+        input {
+            font-family: inherit;
+        }
+
+        /* =========================
+           APP
+        ========================= */
+
         .app {
             display: flex;
             min-height: 100vh;
         }
 
-        /* SIDEBAR */
+
+        /* =========================
+           SIDEBAR
+        ========================= */
 
         .sidebar {
             width: 240px;
@@ -35,6 +50,7 @@
             left: 0;
             top: 0;
             bottom: 0;
+            z-index: 100;
         }
 
         .brand {
@@ -78,12 +94,20 @@
             color: white;
         }
 
-        /* MAIN */
+
+        /* =========================
+           MAIN
+        ========================= */
 
         .main {
             margin-left: 240px;
             width: calc(100% - 240px);
         }
+
+
+        /* =========================
+           TOPBAR
+        ========================= */
 
         .topbar {
             height: 70px;
@@ -93,6 +117,9 @@
             align-items: center;
             justify-content: space-between;
             padding: 0 30px;
+            position: sticky;
+            top: 0;
+            z-index: 50;
         }
 
         .topbar h2 {
@@ -118,11 +145,28 @@
             font-weight: bold;
         }
 
+        .logout-button {
+            border: none;
+            background: #fee2e2;
+            color: #b91c1c;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+
+        /* =========================
+           CONTENT
+        ========================= */
+
         .content {
             padding: 30px;
         }
 
-        /* CARDS */
+
+        /* =========================
+           CARDS
+        ========================= */
 
         .cards {
             display: grid;
@@ -149,7 +193,10 @@
             font-weight: bold;
         }
 
-        /* CONTENT BOX */
+
+        /* =========================
+           CONTENT BOX
+        ========================= */
 
         .box {
             background: white;
@@ -174,7 +221,169 @@
             color: #9ca3af;
         }
 
-        /* MOBILE */
+
+        /* =========================
+           PRODUCT FORM
+        ========================= */
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-size: 13px;
+            margin-bottom: 6px;
+            color: #4b5563;
+        }
+
+        .form-group input {
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 7px;
+            outline: none;
+        }
+
+        .form-group input:focus {
+            border-color: #2563eb;
+        }
+
+        .primary-button {
+            margin-top: 18px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+
+        .primary-button:hover {
+            background: #1d4ed8;
+        }
+
+
+        /* =========================
+           PRODUCT LIST
+        ========================= */
+
+        .product-item {
+            padding: 16px;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .product-item:last-child {
+            border-bottom: none;
+        }
+
+        .product-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .product-details {
+            color: #6b7280;
+            font-size: 13px;
+        }
+
+        .stock-number {
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+
+        /* =========================
+           MESSAGE
+        ========================= */
+
+        .message {
+            margin-top: 12px;
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           LOGIN SCREEN
+        ========================= */
+
+        #authScreen {
+            position: fixed;
+            inset: 0;
+            background: #f5f7fb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 20px;
+        }
+
+        .auth-box {
+            width: 380px;
+            max-width: 100%;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+        }
+
+        .auth-box h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .auth-input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 7px;
+            outline: none;
+        }
+
+        .auth-button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 7px;
+            background: #2563eb;
+            color: white;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .auth-switch {
+            text-align: center;
+            margin-top: 18px;
+            font-size: 14px;
+        }
+
+        .auth-switch button {
+            border: none;
+            background: none;
+            color: #2563eb;
+            cursor: pointer;
+        }
+
+        #authMessage {
+            text-align: center;
+            margin-top: 12px;
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
 
         @media (max-width: 900px) {
 
@@ -190,7 +399,9 @@
             .cards {
                 grid-template-columns: repeat(2, 1fr);
             }
+
         }
+
 
         @media (max-width: 650px) {
 
@@ -242,13 +453,93 @@
             .cards {
                 grid-template-columns: 1fr;
             }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .product-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
         }
+
     </style>
+
 </head>
+
 
 <body>
 
-<div class="app">
+
+<!-- =====================================================
+     LOGIN / SIGNUP
+===================================================== -->
+
+<div id="authScreen">
+
+    <div class="auth-box">
+
+        <h2 id="authTitle">
+            Login
+        </h2>
+
+
+        <input
+            id="authEmail"
+            class="auth-input"
+            type="email"
+            placeholder="Email"
+        >
+
+
+        <input
+            id="authPassword"
+            class="auth-input"
+            type="password"
+            placeholder="Password"
+        >
+
+
+        <button
+            id="authButton"
+            class="auth-button"
+            onclick="handleAuth()"
+        >
+            Login
+        </button>
+
+
+        <p id="authMessage"></p>
+
+
+        <div class="auth-switch">
+
+            <span id="authSwitchText">
+                Don't have an account?
+            </span>
+
+            <button onclick="switchAuthMode()">
+                <span id="authSwitchButton">
+                    Sign Up
+                </span>
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     MAIN APP
+===================================================== -->
+
+<div class="app" id="mainApp" style="display:none;">
+
 
     <!-- SIDEBAR -->
 
@@ -258,37 +549,52 @@
             WHOLESALE <span>SYS</span>
         </div>
 
+
         <div class="menu-title">
             Management
         </div>
 
+
         <div class="menu">
 
-            <button class="active">
+            <button
+                id="dashboardMenu"
+                class="active"
+                onclick="showSection('dashboard')"
+            >
                 📊 Dashboard
             </button>
 
-            <button>
+
+            <button
+                id="productsMenu"
+                onclick="showSection('products')"
+            >
                 📦 Products
             </button>
 
-            <button>
+
+            <button onclick="showSection('production')">
                 🏭 Production
             </button>
 
-            <button>
+
+            <button onclick="showSection('stores')">
                 🏪 Stores
             </button>
 
-            <button>
+
+            <button onclick="showSection('sales')">
                 🧾 Sales
             </button>
 
-            <button>
+
+            <button onclick="showSection('expenses')">
                 💰 Expenses
             </button>
 
-            <button>
+
+            <button onclick="showSection('reports')">
                 📈 Reports
             </button>
 
@@ -297,93 +603,346 @@
     </aside>
 
 
+
     <!-- MAIN -->
 
     <main class="main">
 
+
+        <!-- TOPBAR -->
+
         <header class="topbar">
 
-            <h2>Dashboard</h2>
+            <h2 id="pageTitle">
+                Dashboard
+            </h2>
+
 
             <div class="user">
 
-                <div>
-                    Sinan
+                <div id="userEmail">
+                    User
                 </div>
+
 
                 <div class="avatar">
                     S
                 </div>
+
+
+                <button
+                    class="logout-button"
+                    onclick="logout()"
+                >
+                    Logout
+                </button>
 
             </div>
 
         </header>
 
 
+
+        <!-- CONTENT -->
+
         <section class="content">
 
-            <!-- SUMMARY CARDS -->
 
-            <div class="cards">
+            <!-- =================================================
+                 DASHBOARD
+            ================================================== -->
 
-                <div class="card">
-                    <div class="card-title">
-                        Total Sales
+            <div id="dashboardSection">
+
+
+                <div class="cards">
+
+
+                    <div class="card">
+
+                        <div class="card-title">
+                            Total Sales
+                        </div>
+
+                        <div class="card-value">
+                            ৳0
+                        </div>
+
                     </div>
 
-                    <div class="card-value">
-                        ৳0
+
+
+                    <div class="card">
+
+                        <div class="card-title">
+                            Total Profit
+                        </div>
+
+                        <div class="card-value">
+                            ৳0
+                        </div>
+
                     </div>
+
+
+
+                    <div class="card">
+
+                        <div class="card-title">
+                            Products
+                        </div>
+
+                        <div
+                            id="dashboardProductCount"
+                            class="card-value"
+                        >
+                            0
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="card">
+
+                        <div class="card-title">
+                            Stores
+                        </div>
+
+                        <div class="card-value">
+                            0
+                        </div>
+
+                    </div>
+
                 </div>
 
 
-                <div class="card">
-                    <div class="card-title">
-                        Total Profit
+
+                <div class="box">
+
+                    <div class="box-header">
+                        Recent Sales
                     </div>
 
-                    <div class="card-value">
-                        ৳0
+                    <div class="box-body">
+
+                        <div class="empty">
+                            No sales recorded yet.
+                        </div>
+
                     </div>
+
                 </div>
 
 
-                <div class="card">
-                    <div class="card-title">
-                        Products
+
+                <div class="box">
+
+                    <div class="box-header">
+                        Stock Overview
                     </div>
 
-                    <div class="card-value">
-                        0
+                    <div class="box-body">
+
+                        <div
+                            id="dashboardStock"
+                            class="empty"
+                        >
+                            No products added yet.
+                        </div>
+
                     </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 PRODUCTS
+            ================================================== -->
+
+            <div
+                id="productsSection"
+                style="display:none;"
+            >
+
+
+                <!-- ADD PRODUCT -->
+
+                <div class="box">
+
+                    <div class="box-header">
+                        Add New Product
+                    </div>
+
+
+                    <div class="box-body">
+
+
+                        <div class="form-grid">
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    Product Name
+                                </label>
+
+                                <input
+                                    id="productName"
+                                    type="text"
+                                    placeholder="Example: School Canvas"
+                                >
+
+                            </div>
+
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    Product Code
+                                </label>
+
+                                <input
+                                    id="productCode"
+                                    type="text"
+                                    placeholder="Example: SC001"
+                                >
+
+                            </div>
+
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    Category
+                                </label>
+
+                                <input
+                                    id="productCategory"
+                                    type="text"
+                                    placeholder="Example: Canvas"
+                                >
+
+                            </div>
+
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    Unit
+                                </label>
+
+                                <input
+                                    id="productUnit"
+                                    type="text"
+                                    placeholder="Example: Piece"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+
+                        <button
+                            class="primary-button"
+                            onclick="addProduct()"
+                        >
+                            + Add Product
+                        </button>
+
+
+                        <p
+                            id="productMessage"
+                            class="message"
+                        ></p>
+
+                    </div>
+
                 </div>
 
 
-                <div class="card">
-                    <div class="card-title">
+
+                <!-- PRODUCT LIST -->
+
+                <div class="box">
+
+                    <div class="box-header">
+                        Product List
+                    </div>
+
+
+                    <div
+                        id="productList"
+                        class="box-body"
+                    >
+
+                        <div class="empty">
+                            Loading products...
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 OTHER SECTIONS
+            ================================================== -->
+
+            <div
+                id="productionSection"
+                style="display:none;"
+            >
+
+                <div class="box">
+
+                    <div class="box-header">
+                        Production
+                    </div>
+
+                    <div class="box-body">
+
+                        <div class="empty">
+                            Production system will be added next.
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <div
+                id="storesSection"
+                style="display:none;"
+            >
+
+                <div class="box">
+
+                    <div class="box-header">
                         Stores
                     </div>
 
-                    <div class="card-value">
-                        0
-                    </div>
-                </div>
+                    <div class="box-body">
 
-            </div>
+                        <div class="empty">
+                            Store management will be added next.
+                        </div>
 
-
-            <!-- RECENT SALES -->
-
-            <div class="box">
-
-                <div class="box-header">
-                    Recent Sales
-                </div>
-
-                <div class="box-body">
-
-                    <div class="empty">
-                        No sales recorded yet.
                     </div>
 
                 </div>
@@ -391,202 +950,896 @@
             </div>
 
 
-            <!-- STOCK -->
 
-            <div class="box">
+            <div
+                id="salesSection"
+                style="display:none;"
+            >
 
-                <div class="box-header">
-                    Stock Overview
-                </div>
+                <div class="box">
 
-                <div class="box-body">
+                    <div class="box-header">
+                        Sales
+                    </div>
 
-                    <div class="empty">
-                        No products added yet.
+                    <div class="box-body">
+
+                        <div class="empty">
+                            Sales system will be added next.
+                        </div>
+
                     </div>
 
                 </div>
 
             </div>
+
+
+
+            <div
+                id="expensesSection"
+                style="display:none;"
+            >
+
+                <div class="box">
+
+                    <div class="box-header">
+                        Expenses
+                    </div>
+
+                    <div class="box-body">
+
+                        <div class="empty">
+                            Expense system will be added next.
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <div
+                id="reportsSection"
+                style="display:none;"
+            >
+
+                <div class="box">
+
+                    <div class="box-header">
+                        Reports
+                    </div>
+
+                    <div class="box-body">
+
+                        <div class="empty">
+                            Reports will be added next.
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
 
         </section>
 
     </main>
 
 </div>
-<!-- Supabase -->
+
+
+
+<!-- =====================================================
+     SUPABASE
+===================================================== -->
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+
 <script>
-    const SUPABASE_URL = "https://zyyolktijcesfvutdhhb.supabase.co";
 
-    // তোমার Supabase Settings → API Keys থেকে Publishable key বসাও
-    const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_q5pjAKLBylQTi-hht5OiRA_K0QCCWFa";
 
-    const supabaseClient = supabase.createClient(
+/* =====================================================
+   SUPABASE CONNECTION
+===================================================== */
+
+const SUPABASE_URL =
+    "https://zyyolktijcesfvutdhhb.supabase.co";
+
+
+const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_q5pjAKLBylQTi-hht5OiRA_K0QCCWFa";
+
+
+const supabaseClient =
+    supabase.createClient(
         SUPABASE_URL,
         SUPABASE_PUBLISHABLE_KEY
     );
 
-    async function testSupabaseConnection() {
 
-        console.log("Connecting to Supabase...");
 
-        const { data, error } = await supabaseClient
-            .from("products")
-            .select("id")
-            .limit(1);
-
-        if (error) {
-            console.error("Supabase Error:", error);
-            return;
-        }
-
-        console.log("Supabase Connected Successfully!");
-        console.log("Products:", data);
-    }
-
-    testSupabaseConnection();
-</script>
-    <!-- LOGIN SYSTEM -->
-
-<div id="authScreen" style="
-position:fixed;
-inset:0;
-background:#f5f7fb;
-display:flex;
-align-items:center;
-justify-content:center;
-z-index:9999;
-">
-
-<div style="
-width:350px;
-background:white;
-padding:30px;
-border-radius:15px;
-box-shadow:0 10px 30px rgba(0,0,0,0.12);
-">
-
-<h2 id="authTitle" style="text-align:center;">Login</h2>
-
-<input id="authEmail"
-type="email"
-placeholder="Email"
-style="width:100%;padding:12px;margin:8px 0;box-sizing:border-box;">
-
-<input id="authPassword"
-type="password"
-placeholder="Password"
-style="width:100%;padding:12px;margin:8px 0;box-sizing:border-box;">
-
-<button onclick="handleAuth()"
-style="width:100%;padding:12px;margin-top:10px;">
-<span id="authButtonText">Login</span>
-</button>
-
-<p id="authMessage" style="text-align:center;"></p>
-
-<p style="text-align:center;">
-<span id="authSwitchText">Don't have an account?</span>
-
-<button onclick="switchAuthMode()"
-style="border:none;background:none;color:#2563eb;">
-<span id="authSwitchButton">Sign Up</span>
-</button>
-</p>
-
-</div>
-</div>
-
-<script>
+/* =====================================================
+   AUTH MODE
+===================================================== */
 
 let authMode = "login";
 
+
+
+/* =====================================================
+   SWITCH LOGIN / SIGNUP
+===================================================== */
+
 function switchAuthMode() {
+
+
+    const title =
+        document.getElementById("authTitle");
+
+    const button =
+        document.getElementById("authButton");
+
+    const switchText =
+        document.getElementById("authSwitchText");
+
+    const switchButton =
+        document.getElementById("authSwitchButton");
+
+
+    const message =
+        document.getElementById("authMessage");
+
+
+    message.innerText = "";
+
 
     if (authMode === "login") {
 
         authMode = "signup";
 
-        document.getElementById("authTitle").innerText = "Create Account";
-        document.getElementById("authButtonText").innerText = "Sign Up";
-        document.getElementById("authSwitchText").innerText =
+
+        title.innerText =
+            "Create Account";
+
+
+        button.innerText =
+            "Sign Up";
+
+
+        switchText.innerText =
             "Already have an account?";
-        document.getElementById("authSwitchButton").innerText = "Login";
+
+
+        switchButton.innerText =
+            "Login";
+
 
     } else {
 
         authMode = "login";
 
-        document.getElementById("authTitle").innerText = "Login";
-        document.getElementById("authButtonText").innerText = "Login";
-        document.getElementById("authSwitchText").innerText =
+
+        title.innerText =
+            "Login";
+
+
+        button.innerText =
+            "Login";
+
+
+        switchText.innerText =
             "Don't have an account?";
-        document.getElementById("authSwitchButton").innerText = "Sign Up";
+
+
+        switchButton.innerText =
+            "Sign Up";
+
     }
+
 }
+
+
+
+/* =====================================================
+   LOGIN / SIGNUP
+===================================================== */
 
 async function handleAuth() {
 
-    const email = document.getElementById("authEmail").value.trim();
-    const password = document.getElementById("authPassword").value;
-    const message = document.getElementById("authMessage");
+
+    const email =
+        document.getElementById("authEmail")
+        .value
+        .trim();
+
+
+    const password =
+        document.getElementById("authPassword")
+        .value;
+
+
+    const message =
+        document.getElementById("authMessage");
+
+
+    const button =
+        document.getElementById("authButton");
+
 
     if (!email || !password) {
-        message.innerText = "Email এবং Password দিন।";
+
+        message.innerText =
+            "Email এবং Password দিন।";
+
         return;
     }
 
-    message.innerText = "Please wait...";
+
+    button.disabled = true;
+
+    message.innerText =
+        "Please wait...";
+
+
+    /* =========================
+       SIGNUP
+    ========================= */
 
     if (authMode === "signup") {
 
-        const { error } = await supabaseClient.auth.signUp({
-            email: email,
-            password: password
-        });
 
-        if (error) {
-            message.innerText = error.message;
-            return;
-        }
+        const { data, error } =
+            await supabaseClient.auth.signUp({
 
-        message.innerText =
-            "Account তৈরি হয়েছে। Email verify করুন।";
-
-    } else {
-
-        const { error } =
-            await supabaseClient.auth.signInWithPassword({
                 email: email,
+
                 password: password
+
             });
 
+
         if (error) {
-            message.innerText = error.message;
+
+            message.innerText =
+                error.message;
+
+            button.disabled = false;
+
             return;
         }
 
-        message.innerText = "Login successful!";
 
-        setTimeout(() => {
-            document.getElementById("authScreen").style.display = "none";
-        }, 500);
+        message.innerText =
+            "Account তৈরি হয়েছে! Email verification চাইলে email check করুন।";
+
+
+        button.disabled = false;
+
+
+        return;
     }
+
+
+
+    /* =========================
+       LOGIN
+    ========================= */
+
+    const { data, error } =
+        await supabaseClient.auth.signInWithPassword({
+
+            email: email,
+
+            password: password
+
+        });
+
+
+    if (error) {
+
+        message.innerText =
+            error.message;
+
+        button.disabled = false;
+
+        return;
+    }
+
+
+    message.innerText =
+        "Login successful!";
+
+
+    button.disabled = false;
+
+
+    showMainApp(data.user);
+
 }
+
+
+
+/* =====================================================
+   CHECK LOGIN
+===================================================== */
 
 async function checkLogin() {
 
-    const { data } = await supabaseClient.auth.getSession();
+
+    const { data } =
+        await supabaseClient.auth.getSession();
+
 
     if (data.session) {
-        document.getElementById("authScreen").style.display = "none";
+
+        showMainApp(
+            data.session.user
+        );
+
+    } else {
+
+        document.getElementById("authScreen")
+            .style.display = "flex";
+
+        document.getElementById("mainApp")
+            .style.display = "none";
+
     }
+
 }
+
+
+
+/* =====================================================
+   SHOW MAIN APP
+===================================================== */
+
+function showMainApp(user) {
+
+
+    document.getElementById("authScreen")
+        .style.display = "none";
+
+
+    document.getElementById("mainApp")
+        .style.display = "flex";
+
+
+    if (user && user.email) {
+
+        document.getElementById("userEmail")
+            .innerText = user.email;
+
+    }
+
+
+    loadProducts();
+
+}
+
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+async function logout() {
+
+
+    await supabaseClient.auth.signOut();
+
+
+    document.getElementById("mainApp")
+        .style.display = "none";
+
+
+    document.getElementById("authScreen")
+        .style.display = "flex";
+
+
+    document.getElementById("authEmail")
+        .value = "";
+
+
+    document.getElementById("authPassword")
+        .value = "";
+
+
+    document.getElementById("authMessage")
+        .innerText = "";
+
+}
+
+
+
+/* =====================================================
+   PAGE NAVIGATION
+===================================================== */
+
+function showSection(sectionName) {
+
+
+    const sections = [
+
+        "dashboard",
+        "products",
+        "production",
+        "stores",
+        "sales",
+        "expenses",
+        "reports"
+
+    ];
+
+
+    sections.forEach(function(section) {
+
+        const element =
+            document.getElementById(
+                section + "Section"
+            );
+
+
+        if (element) {
+
+            element.style.display =
+                "none";
+
+        }
+
+    });
+
+
+
+    const selected =
+        document.getElementById(
+            sectionName + "Section"
+        );
+
+
+    if (selected) {
+
+        selected.style.display =
+            "block";
+
+    }
+
+
+
+    /* =========================
+       ACTIVE MENU
+    ========================= */
+
+    document
+        .querySelectorAll(".menu button")
+        .forEach(function(button) {
+
+            button.classList.remove("active");
+
+        });
+
+
+    const menuButton =
+        document.getElementById(
+            sectionName + "Menu"
+        );
+
+
+    if (menuButton) {
+
+        menuButton.classList.add("active");
+
+    }
+
+
+
+    /* =========================
+       PAGE TITLE
+    ========================= */
+
+    const titles = {
+
+        dashboard: "Dashboard",
+
+        products: "Products",
+
+        production: "Production",
+
+        stores: "Stores",
+
+        sales: "Sales",
+
+        expenses: "Expenses",
+
+        reports: "Reports"
+
+    };
+
+
+    document.getElementById("pageTitle")
+        .innerText =
+        titles[sectionName] || "Dashboard";
+
+
+
+    if (sectionName === "products") {
+
+        loadProducts();
+
+    }
+
+}
+
+
+
+/* =====================================================
+   ADD PRODUCT
+===================================================== */
+
+async function addProduct() {
+
+
+    const name =
+        document.getElementById("productName")
+        .value
+        .trim();
+
+
+    const code =
+        document.getElementById("productCode")
+        .value
+        .trim();
+
+
+    const category =
+        document.getElementById("productCategory")
+        .value
+        .trim();
+
+
+    const unit =
+        document.getElementById("productUnit")
+        .value
+        .trim();
+
+
+    const message =
+        document.getElementById("productMessage");
+
+
+
+    if (!name) {
+
+        message.innerText =
+            "Product Name দিন।";
+
+        return;
+
+    }
+
+
+    message.innerText =
+        "Saving product...";
+
+
+
+    /* =========================
+       CURRENT USER
+    ========================= */
+
+    const { data: sessionData } =
+        await supabaseClient.auth.getSession();
+
+
+    const user =
+        sessionData.session
+            ? sessionData.session.user
+            : null;
+
+
+    if (!user) {
+
+        message.innerText =
+            "Please login first.";
+
+        return;
+
+    }
+
+
+
+    /* =========================
+       INSERT PRODUCT
+    ========================= */
+
+    const { error } =
+        await supabaseClient
+            .from("products")
+            .insert({
+
+                product_name: name,
+
+                product_code: code || null,
+
+                category: category || null,
+
+                unit: unit || "Piece",
+
+                current_stock: 0,
+
+                user_id: user.id
+
+            });
+
+
+
+    if (error) {
+
+        console.error(
+            "Product Error:",
+            error
+        );
+
+
+        message.innerText =
+            "Error: " + error.message;
+
+
+        return;
+
+    }
+
+
+
+    message.innerText =
+        "Product added successfully!";
+
+
+    /* =========================
+       CLEAR FORM
+    ========================= */
+
+    document.getElementById("productName")
+        .value = "";
+
+
+    document.getElementById("productCode")
+        .value = "";
+
+
+    document.getElementById("productCategory")
+        .value = "";
+
+
+    document.getElementById("productUnit")
+        .value = "";
+
+
+
+    /* =========================
+       RELOAD
+    ========================= */
+
+    await loadProducts();
+
+}
+
+
+
+/* =====================================================
+   LOAD PRODUCTS
+===================================================== */
+
+async function loadProducts() {
+
+
+    const list =
+        document.getElementById("productList");
+
+
+    if (!list) {
+        return;
+    }
+
+
+    list.innerHTML =
+        '<div class="empty">Loading products...</div>';
+
+
+
+    const { data, error } =
+        await supabaseClient
+            .from("products")
+            .select("*")
+            .order(
+                "created_at",
+                {
+                    ascending: false
+                }
+            );
+
+
+
+    if (error) {
+
+        console.error(
+            "Load Products Error:",
+            error
+        );
+
+
+        list.innerHTML =
+            '<div class="empty">Products load করতে সমস্যা হয়েছে.</div>';
+
+        return;
+
+    }
+
+
+
+    /* =========================
+       NO PRODUCTS
+    ========================= */
+
+    if (!data || data.length === 0) {
+
+        list.innerHTML =
+            '<div class="empty">No products added yet.</div>';
+
+
+        document.getElementById(
+            "dashboardProductCount"
+        ).innerText = "0";
+
+
+        document.getElementById(
+            "dashboardStock"
+        ).innerHTML =
+            "No products added yet.";
+
+
+        return;
+
+    }
+
+
+
+    /* =========================
+       PRODUCT COUNT
+    ========================= */
+
+    document.getElementById(
+        "dashboardProductCount"
+    ).innerText =
+        data.length;
+
+
+
+    /* =========================
+       PRODUCT LIST
+    ========================= */
+
+    list.innerHTML =
+        data.map(function(product) {
+
+            return `
+
+                <div class="product-item">
+
+                    <div>
+
+                        <div class="product-name">
+                            ${escapeHTML(product.product_name)}
+                        </div>
+
+                        <div class="product-details">
+
+                            Code:
+                            ${escapeHTML(product.product_code || "-")}
+
+                            &nbsp; | &nbsp;
+
+                            Category:
+                            ${escapeHTML(product.category || "-")}
+
+                            &nbsp; | &nbsp;
+
+                            Unit:
+                            ${escapeHTML(product.unit || "-")}
+
+                        </div>
+
+                    </div>
+
+
+                    <div>
+
+                        Stock:
+
+                        <span class="stock-number">
+                            ${product.current_stock || 0}
+                        </span>
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }).join("");
+
+
+
+    /* =========================
+       DASHBOARD STOCK
+    ========================= */
+
+    document.getElementById(
+        "dashboardStock"
+    ).innerHTML =
+
+        data.map(function(product) {
+
+            return `
+
+                <div style="
+                    padding:10px 0;
+                    border-bottom:1px solid #e5e7eb;
+                ">
+
+                    ${escapeHTML(product.product_name)}
+
+                    —
+
+                    <strong>
+                        ${product.current_stock || 0}
+                    </strong>
+
+                    ${escapeHTML(product.unit || "Piece")}
+
+                </div>
+
+            `;
+
+        }).join("");
+
+}
+
+
+
+/* =====================================================
+   SAFE TEXT
+===================================================== */
+
+function escapeHTML(value) {
+
+    const div =
+        document.createElement("div");
+
+    div.innerText =
+        value;
+
+    return div.innerHTML;
+
+}
+
+
+
+/* =====================================================
+   START APP
+===================================================== */
 
 checkLogin();
 
+
 </script>
+
+
 </body>
+
 </html>
