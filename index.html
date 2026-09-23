@@ -23,19 +23,15 @@
         }
 
         button,
-        input {
+        input,
+        select {
             font-family: inherit;
         }
-
-        /* =========================
-           APP
-        ========================= */
 
         .app {
             display: flex;
             min-height: 100vh;
         }
-
 
         /* =========================
            SIDEBAR
@@ -94,7 +90,6 @@
             color: white;
         }
 
-
         /* =========================
            MAIN
         ========================= */
@@ -103,7 +98,6 @@
             margin-left: 240px;
             width: calc(100% - 240px);
         }
-
 
         /* =========================
            TOPBAR
@@ -154,7 +148,6 @@
             cursor: pointer;
         }
 
-
         /* =========================
            CONTENT
         ========================= */
@@ -162,7 +155,6 @@
         .content {
             padding: 30px;
         }
-
 
         /* =========================
            CARDS
@@ -193,9 +185,8 @@
             font-weight: bold;
         }
 
-
         /* =========================
-           CONTENT BOX
+           BOX
         ========================= */
 
         .box {
@@ -221,9 +212,8 @@
             color: #9ca3af;
         }
 
-
         /* =========================
-           PRODUCT FORM
+           FORM
         ========================= */
 
         .form-grid {
@@ -243,14 +233,17 @@
             color: #4b5563;
         }
 
-        .form-group input {
+        .form-group input,
+        .form-group select {
             padding: 12px;
             border: 1px solid #d1d5db;
             border-radius: 7px;
             outline: none;
+            background: white;
         }
 
-        .form-group input:focus {
+        .form-group input:focus,
+        .form-group select:focus {
             border-color: #2563eb;
         }
 
@@ -268,6 +261,45 @@
             background: #1d4ed8;
         }
 
+        .primary-button:disabled {
+            background: #93c5fd;
+            cursor: not-allowed;
+        }
+
+        /* =========================
+           PRODUCTION COST BOX
+        ========================= */
+
+        .cost-summary {
+            margin-top: 20px;
+            background: #f8fafc;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 18px;
+        }
+
+        .cost-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .cost-row:last-child {
+            border-bottom: none;
+        }
+
+        .total-cost {
+            font-size: 20px;
+            font-weight: bold;
+            color: #111827;
+        }
+
+        .piece-cost {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2563eb;
+        }
 
         /* =========================
            PRODUCT LIST
@@ -301,6 +333,48 @@
             color: #2563eb;
         }
 
+        /* =========================
+           PRODUCTION HISTORY
+        ========================= */
+
+        .production-item {
+            padding: 18px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .production-item:last-child {
+            border-bottom: none;
+        }
+
+        .production-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 8px;
+        }
+
+        .production-product {
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .production-date {
+            color: #6b7280;
+            font-size: 13px;
+        }
+
+        .production-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            color: #4b5563;
+            font-size: 13px;
+        }
+
+        .production-total {
+            margin-top: 10px;
+            font-weight: bold;
+        }
 
         /* =========================
            MESSAGE
@@ -311,9 +385,8 @@
             font-size: 14px;
         }
 
-
         /* =========================
-           LOGIN SCREEN
+           LOGIN
         ========================= */
 
         #authScreen {
@@ -380,7 +453,6 @@
             font-size: 14px;
         }
 
-
         /* =========================
            MOBILE
         ========================= */
@@ -399,9 +471,7 @@
             .cards {
                 grid-template-columns: repeat(2, 1fr);
             }
-
         }
-
 
         @media (max-width: 650px) {
 
@@ -463,12 +533,14 @@
                 align-items: flex-start;
             }
 
+            .production-top {
+                flex-direction: column;
+            }
         }
 
     </style>
 
 </head>
-
 
 <body>
 
@@ -485,7 +557,6 @@
             Login
         </h2>
 
-
         <input
             id="authEmail"
             class="auth-input"
@@ -493,14 +564,12 @@
             placeholder="Email"
         >
 
-
         <input
             id="authPassword"
             class="auth-input"
             type="password"
             placeholder="Password"
         >
-
 
         <button
             id="authButton"
@@ -510,9 +579,7 @@
             Login
         </button>
 
-
         <p id="authMessage"></p>
-
 
         <div class="auth-switch">
 
@@ -533,7 +600,6 @@
 </div>
 
 
-
 <!-- =====================================================
      MAIN APP
 ===================================================== -->
@@ -549,11 +615,9 @@
             WHOLESALE <span>SYS</span>
         </div>
 
-
         <div class="menu-title">
             Management
         </div>
-
 
         <div class="menu">
 
@@ -565,7 +629,6 @@
                 📊 Dashboard
             </button>
 
-
             <button
                 id="productsMenu"
                 onclick="showSection('products')"
@@ -573,35 +636,44 @@
                 📦 Products
             </button>
 
-
-            <button onclick="showSection('production')">
+            <button
+                id="productionMenu"
+                onclick="showSection('production')"
+            >
                 🏭 Production
             </button>
 
-
-            <button onclick="showSection('stores')">
+            <button
+                id="storesMenu"
+                onclick="showSection('stores')"
+            >
                 🏪 Stores
             </button>
 
-
-            <button onclick="showSection('sales')">
+            <button
+                id="salesMenu"
+                onclick="showSection('sales')"
+            >
                 🧾 Sales
             </button>
 
-
-            <button onclick="showSection('expenses')">
+            <button
+                id="expensesMenu"
+                onclick="showSection('expenses')"
+            >
                 💰 Expenses
             </button>
 
-
-            <button onclick="showSection('reports')">
+            <button
+                id="reportsMenu"
+                onclick="showSection('reports')"
+            >
                 📈 Reports
             </button>
 
         </div>
 
     </aside>
-
 
 
     <!-- MAIN -->
@@ -617,18 +689,15 @@
                 Dashboard
             </h2>
 
-
             <div class="user">
 
                 <div id="userEmail">
                     User
                 </div>
 
-
                 <div class="avatar">
                     S
                 </div>
-
 
                 <button
                     class="logout-button"
@@ -642,7 +711,6 @@
         </header>
 
 
-
         <!-- CONTENT -->
 
         <section class="content">
@@ -654,9 +722,7 @@
 
             <div id="dashboardSection">
 
-
                 <div class="cards">
-
 
                     <div class="card">
 
@@ -670,8 +736,6 @@
 
                     </div>
 
-
-
                     <div class="card">
 
                         <div class="card-title">
@@ -683,8 +747,6 @@
                         </div>
 
                     </div>
-
-
 
                     <div class="card">
 
@@ -701,8 +763,6 @@
 
                     </div>
 
-
-
                     <div class="card">
 
                         <div class="card-title">
@@ -716,7 +776,6 @@
                     </div>
 
                 </div>
-
 
 
                 <div class="box">
@@ -734,7 +793,6 @@
                     </div>
 
                 </div>
-
 
 
                 <div class="box">
@@ -759,7 +817,6 @@
             </div>
 
 
-
             <!-- =================================================
                  PRODUCTS
             ================================================== -->
@@ -769,21 +826,15 @@
                 style="display:none;"
             >
 
-
-                <!-- ADD PRODUCT -->
-
                 <div class="box">
 
                     <div class="box-header">
                         Add New Product
                     </div>
 
-
                     <div class="box-body">
 
-
                         <div class="form-grid">
-
 
                             <div class="form-group">
 
@@ -799,8 +850,6 @@
 
                             </div>
 
-
-
                             <div class="form-group">
 
                                 <label>
@@ -815,8 +864,6 @@
 
                             </div>
 
-
-
                             <div class="form-group">
 
                                 <label>
@@ -830,8 +877,6 @@
                                 >
 
                             </div>
-
-
 
                             <div class="form-group">
 
@@ -849,15 +894,12 @@
 
                         </div>
 
-
-
                         <button
                             class="primary-button"
                             onclick="addProduct()"
                         >
                             + Add Product
                         </button>
-
 
                         <p
                             id="productMessage"
@@ -869,15 +911,11 @@
                 </div>
 
 
-
-                <!-- PRODUCT LIST -->
-
                 <div class="box">
 
                     <div class="box-header">
                         Product List
                     </div>
-
 
                     <div
                         id="productList"
@@ -892,13 +930,11 @@
 
                 </div>
 
-
             </div>
 
 
-
             <!-- =================================================
-                 OTHER SECTIONS
+                 PRODUCTION
             ================================================== -->
 
             <div
@@ -906,25 +942,299 @@
                 style="display:none;"
             >
 
+
+                <!-- ADD PRODUCTION -->
+
                 <div class="box">
 
                     <div class="box-header">
-                        Production
+                        Add Production
                     </div>
 
                     <div class="box-body">
 
+
+                        <div class="form-grid">
+
+
+                            <!-- PRODUCT -->
+
+                            <div class="form-group">
+
+                                <label>
+                                    Product
+                                </label>
+
+                                <select
+                                    id="productionProduct"
+                                    onchange="updateProductionCalculation()"
+                                >
+
+                                    <option value="">
+                                        Select Product
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <!-- QUANTITY -->
+
+                            <div class="form-group">
+
+                                <label>
+                                    Production Quantity
+                                </label>
+
+                                <input
+                                    id="productionQuantity"
+                                    type="number"
+                                    min="1"
+                                    placeholder="Example: 500"
+                                    oninput="updateProductionCalculation()"
+                                >
+
+                            </div>
+
+
+                            <!-- DATE -->
+
+                            <div class="form-group">
+
+                                <label>
+                                    Production Date
+                                </label>
+
+                                <input
+                                    id="productionDate"
+                                    type="date"
+                                >
+
+                            </div>
+
+
+                            <!-- MATERIAL -->
+
+                            <div class="form-group">
+
+                                <label>
+                                    Material Cost (৳)
+                                </label>
+
+                                <input
+                                    id="materialCost"
+                                    type="number"
+                                    min="0"
+                                    step="0.01"
+                                    placeholder="0"
+                                    oninput="updateProductionCalculation()"
+                                >
+
+                            </div>
+
+
+                            <!-- PRINTING -->
+
+                            <div class="form-group">
+
+                                <label>
+                                    Printing Cost (৳)
+                                </label>
+
+                                <input
+                                    id="printingCost"
+                                    type="number"
+                                    min="0"
+                                    step="0.01"
+                                    placeholder="0"
+                                    oninput="updateProductionCalculation()"
+                                >
+
+                            </div>
+
+
+                            <!-- LABOUR -->
+
+                            <div class="form-group">
+
+                                <label>
+                                    Labour Cost (৳)
+                                </label>
+
+                                <input
+                                    id="labourCost"
+                                    type="number"
+                                    min="0"
+                                    step="0.01"
+                                    placeholder="0"
+                                    oninput="updateProductionCalculation()"
+                                >
+
+                            </div>
+
+
+                            <!-- PACKAGING -->
+
+                            <div class="form-group">
+
+                                <label>
+                                    Packaging Cost (৳)
+                                </label>
+
+                                <input
+                                    id="packagingCost"
+                                    type="number"
+                                    min="0"
+                                    step="0.01"
+                                    placeholder="0"
+                                    oninput="updateProductionCalculation()"
+                                >
+
+                            </div>
+
+
+                            <!-- TRANSPORT -->
+
+                            <div class="form-group">
+
+                                <label>
+                                    Transport Cost (৳)
+                                </label>
+
+                                <input
+                                    id="transportCost"
+                                    type="number"
+                                    min="0"
+                                    step="0.01"
+                                    placeholder="0"
+                                    oninput="updateProductionCalculation()"
+                                >
+
+                            </div>
+
+
+                            <!-- OTHER -->
+
+                            <div class="form-group">
+
+                                <label>
+                                    Other Cost (৳)
+                                </label>
+
+                                <input
+                                    id="otherCost"
+                                    type="number"
+                                    min="0"
+                                    step="0.01"
+                                    placeholder="0"
+                                    oninput="updateProductionCalculation()"
+                                >
+
+                            </div>
+
+
+                        </div>
+
+
+                        <!-- COST SUMMARY -->
+
+                        <div class="cost-summary">
+
+                            <div class="cost-row">
+
+                                <span>
+                                    Total Production Cost
+                                </span>
+
+                                <span
+                                    id="totalProductionCost"
+                                    class="total-cost"
+                                >
+                                    ৳0.00
+                                </span>
+
+                            </div>
+
+
+                            <div class="cost-row">
+
+                                <span>
+                                    Production Quantity
+                                </span>
+
+                                <span id="summaryQuantity">
+                                    0
+                                </span>
+
+                            </div>
+
+
+                            <div class="cost-row">
+
+                                <span>
+                                    Cost Per Piece
+                                </span>
+
+                                <span
+                                    id="costPerPiece"
+                                    class="piece-cost"
+                                >
+                                    ৳0.00
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <button
+                            id="saveProductionButton"
+                            class="primary-button"
+                            onclick="saveProduction()"
+                        >
+                            + Save Production
+                        </button>
+
+
+                        <p
+                            id="productionMessage"
+                            class="message"
+                        ></p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PRODUCTION HISTORY -->
+
+                <div class="box">
+
+                    <div class="box-header">
+                        Production History
+                    </div>
+
+                    <div
+                        id="productionList"
+                        class="box-body"
+                    >
+
                         <div class="empty">
-                            Production system will be added next.
+                            Loading production...
                         </div>
 
                     </div>
 
                 </div>
 
+
             </div>
 
 
+            <!-- =================================================
+                 STORES
+            ================================================== -->
 
             <div
                 id="storesSection"
@@ -950,6 +1260,9 @@
             </div>
 
 
+            <!-- =================================================
+                 SALES
+            ================================================== -->
 
             <div
                 id="salesSection"
@@ -975,6 +1288,9 @@
             </div>
 
 
+            <!-- =================================================
+                 EXPENSES
+            ================================================== -->
 
             <div
                 id="expensesSection"
@@ -1000,6 +1316,9 @@
             </div>
 
 
+            <!-- =================================================
+                 REPORTS
+            ================================================== -->
 
             <div
                 id="reportsSection"
@@ -1032,7 +1351,6 @@
 </div>
 
 
-
 <!-- =====================================================
      SUPABASE
 ===================================================== -->
@@ -1062,7 +1380,6 @@ const supabaseClient =
     );
 
 
-
 /* =====================================================
    AUTH MODE
 ===================================================== */
@@ -1070,13 +1387,11 @@ const supabaseClient =
 let authMode = "login";
 
 
-
 /* =====================================================
    SWITCH LOGIN / SIGNUP
 ===================================================== */
 
 function switchAuthMode() {
-
 
     const title =
         document.getElementById("authTitle");
@@ -1090,51 +1405,39 @@ function switchAuthMode() {
     const switchButton =
         document.getElementById("authSwitchButton");
 
-
     const message =
         document.getElementById("authMessage");
 
-
     message.innerText = "";
-
 
     if (authMode === "login") {
 
         authMode = "signup";
 
-
         title.innerText =
             "Create Account";
-
 
         button.innerText =
             "Sign Up";
 
-
         switchText.innerText =
             "Already have an account?";
 
-
         switchButton.innerText =
             "Login";
-
 
     } else {
 
         authMode = "login";
 
-
         title.innerText =
             "Login";
-
 
         button.innerText =
             "Login";
 
-
         switchText.innerText =
             "Don't have an account?";
-
 
         switchButton.innerText =
             "Sign Up";
@@ -1144,32 +1447,26 @@ function switchAuthMode() {
 }
 
 
-
 /* =====================================================
    LOGIN / SIGNUP
 ===================================================== */
 
 async function handleAuth() {
 
-
     const email =
         document.getElementById("authEmail")
         .value
         .trim();
 
-
     const password =
         document.getElementById("authPassword")
         .value;
 
-
     const message =
         document.getElementById("authMessage");
 
-
     const button =
         document.getElementById("authButton");
-
 
     if (!email || !password) {
 
@@ -1179,19 +1476,13 @@ async function handleAuth() {
         return;
     }
 
-
     button.disabled = true;
 
     message.innerText =
         "Please wait...";
 
 
-    /* =========================
-       SIGNUP
-    ========================= */
-
     if (authMode === "signup") {
-
 
         const { data, error } =
             await supabaseClient.auth.signUp({
@@ -1201,7 +1492,6 @@ async function handleAuth() {
                 password: password
 
             });
-
 
         if (error) {
 
@@ -1213,22 +1503,14 @@ async function handleAuth() {
             return;
         }
 
-
         message.innerText =
             "Account তৈরি হয়েছে! Email verification চাইলে email check করুন।";
 
-
         button.disabled = false;
-
 
         return;
     }
 
-
-
-    /* =========================
-       LOGIN
-    ========================= */
 
     const { data, error } =
         await supabaseClient.auth.signInWithPassword({
@@ -1238,7 +1520,6 @@ async function handleAuth() {
             password: password
 
         });
-
 
     if (error) {
 
@@ -1250,18 +1531,14 @@ async function handleAuth() {
         return;
     }
 
-
     message.innerText =
         "Login successful!";
 
-
     button.disabled = false;
-
 
     showMainApp(data.user);
 
 }
-
 
 
 /* =====================================================
@@ -1270,10 +1547,8 @@ async function handleAuth() {
 
 async function checkLogin() {
 
-
     const { data } =
         await supabaseClient.auth.getSession();
-
 
     if (data.session) {
 
@@ -1294,21 +1569,17 @@ async function checkLogin() {
 }
 
 
-
 /* =====================================================
    SHOW MAIN APP
 ===================================================== */
 
 function showMainApp(user) {
 
-
     document.getElementById("authScreen")
         .style.display = "none";
 
-
     document.getElementById("mainApp")
         .style.display = "flex";
-
 
     if (user && user.email) {
 
@@ -1317,11 +1588,9 @@ function showMainApp(user) {
 
     }
 
-
     loadProducts();
 
 }
-
 
 
 /* =====================================================
@@ -1330,25 +1599,19 @@ function showMainApp(user) {
 
 async function logout() {
 
-
     await supabaseClient.auth.signOut();
-
 
     document.getElementById("mainApp")
         .style.display = "none";
 
-
     document.getElementById("authScreen")
         .style.display = "flex";
-
 
     document.getElementById("authEmail")
         .value = "";
 
-
     document.getElementById("authPassword")
         .value = "";
-
 
     document.getElementById("authMessage")
         .innerText = "";
@@ -1356,13 +1619,11 @@ async function logout() {
 }
 
 
-
 /* =====================================================
    PAGE NAVIGATION
 ===================================================== */
 
 function showSection(sectionName) {
-
 
     const sections = [
 
@@ -1384,7 +1645,6 @@ function showSection(sectionName) {
                 section + "Section"
             );
 
-
         if (element) {
 
             element.style.display =
@@ -1393,7 +1653,6 @@ function showSection(sectionName) {
         }
 
     });
-
 
 
     const selected =
@@ -1409,11 +1668,6 @@ function showSection(sectionName) {
 
     }
 
-
-
-    /* =========================
-       ACTIVE MENU
-    ========================= */
 
     document
         .querySelectorAll(".menu button")
@@ -1436,11 +1690,6 @@ function showSection(sectionName) {
 
     }
 
-
-
-    /* =========================
-       PAGE TITLE
-    ========================= */
 
     const titles = {
 
@@ -1466,15 +1715,22 @@ function showSection(sectionName) {
         titles[sectionName] || "Dashboard";
 
 
-
     if (sectionName === "products") {
 
         loadProducts();
 
     }
 
-}
 
+    if (sectionName === "production") {
+
+        loadProductionProducts();
+
+        loadProductionHistory();
+
+    }
+
+}
 
 
 /* =====================================================
@@ -1483,34 +1739,28 @@ function showSection(sectionName) {
 
 async function addProduct() {
 
-
     const name =
         document.getElementById("productName")
         .value
         .trim();
-
 
     const code =
         document.getElementById("productCode")
         .value
         .trim();
 
-
     const category =
         document.getElementById("productCategory")
         .value
         .trim();
-
 
     const unit =
         document.getElementById("productUnit")
         .value
         .trim();
 
-
     const message =
         document.getElementById("productMessage");
-
 
 
     if (!name) {
@@ -1526,11 +1776,6 @@ async function addProduct() {
     message.innerText =
         "Saving product...";
 
-
-
-    /* =========================
-       CURRENT USER
-    ========================= */
 
     const { data: sessionData } =
         await supabaseClient.auth.getSession();
@@ -1552,11 +1797,6 @@ async function addProduct() {
     }
 
 
-
-    /* =========================
-       INSERT PRODUCT
-    ========================= */
-
     const { error } =
         await supabaseClient
             .from("products")
@@ -1577,7 +1817,6 @@ async function addProduct() {
             });
 
 
-
     if (error) {
 
         console.error(
@@ -1585,50 +1824,34 @@ async function addProduct() {
             error
         );
 
-
         message.innerText =
             "Error: " + error.message;
-
 
         return;
 
     }
 
 
-
     message.innerText =
         "Product added successfully!";
 
 
-    /* =========================
-       CLEAR FORM
-    ========================= */
-
     document.getElementById("productName")
         .value = "";
-
 
     document.getElementById("productCode")
         .value = "";
 
-
     document.getElementById("productCategory")
         .value = "";
-
 
     document.getElementById("productUnit")
         .value = "";
 
 
-
-    /* =========================
-       RELOAD
-    ========================= */
-
     await loadProducts();
 
 }
-
 
 
 /* =====================================================
@@ -1636,7 +1859,6 @@ async function addProduct() {
 ===================================================== */
 
 async function loadProducts() {
-
 
     const list =
         document.getElementById("productList");
@@ -1651,7 +1873,6 @@ async function loadProducts() {
         '<div class="empty">Loading products...</div>';
 
 
-
     const { data, error } =
         await supabaseClient
             .from("products")
@@ -1664,14 +1885,12 @@ async function loadProducts() {
             );
 
 
-
     if (error) {
 
         console.error(
             "Load Products Error:",
             error
         );
-
 
         list.innerHTML =
             '<div class="empty">Products load করতে সমস্যা হয়েছে.</div>';
@@ -1680,11 +1899,6 @@ async function loadProducts() {
 
     }
 
-
-
-    /* =========================
-       NO PRODUCTS
-    ========================= */
 
     if (!data || data.length === 0) {
 
@@ -1702,27 +1916,16 @@ async function loadProducts() {
         ).innerHTML =
             "No products added yet.";
 
-
         return;
 
     }
 
-
-
-    /* =========================
-       PRODUCT COUNT
-    ========================= */
 
     document.getElementById(
         "dashboardProductCount"
     ).innerText =
         data.length;
 
-
-
-    /* =========================
-       PRODUCT LIST
-    ========================= */
 
     list.innerHTML =
         data.map(function(product) {
@@ -1774,11 +1977,6 @@ async function loadProducts() {
         }).join("");
 
 
-
-    /* =========================
-       DASHBOARD STOCK
-    ========================= */
-
     document.getElementById(
         "dashboardStock"
     ).innerHTML =
@@ -1811,6 +2009,697 @@ async function loadProducts() {
 }
 
 
+/* =====================================================
+   LOAD PRODUCTS FOR PRODUCTION SELECT
+===================================================== */
+
+async function loadProductionProducts() {
+
+    const select =
+        document.getElementById(
+            "productionProduct"
+        );
+
+
+    if (!select) {
+        return;
+    }
+
+
+    select.innerHTML =
+        '<option value="">Loading products...</option>';
+
+
+    const { data, error } =
+        await supabaseClient
+            .from("products")
+            .select("id, product_name, unit")
+            .order(
+                "product_name",
+                {
+                    ascending: true
+                }
+            );
+
+
+    if (error) {
+
+        console.error(
+            "Production Products Error:",
+            error
+        );
+
+        select.innerHTML =
+            '<option value="">Products load failed</option>';
+
+        return;
+
+    }
+
+
+    if (!data || data.length === 0) {
+
+        select.innerHTML =
+            '<option value="">No products available</option>';
+
+        return;
+
+    }
+
+
+    select.innerHTML =
+        '<option value="">Select Product</option>';
+
+
+    data.forEach(function(product) {
+
+        const option =
+            document.createElement("option");
+
+        option.value =
+            product.id;
+
+        option.textContent =
+            product.product_name +
+            " (" +
+            (product.unit || "Piece") +
+            ")";
+
+        select.appendChild(option);
+
+    });
+
+}
+
+
+/* =====================================================
+   PRODUCTION CALCULATION
+===================================================== */
+
+function getNumber(id) {
+
+    const value =
+        parseFloat(
+            document.getElementById(id).value
+        );
+
+    return isNaN(value)
+        ? 0
+        : value;
+
+}
+
+
+function updateProductionCalculation() {
+
+    const quantity =
+        getNumber("productionQuantity");
+
+
+    const material =
+        getNumber("materialCost");
+
+
+    const printing =
+        getNumber("printingCost");
+
+
+    const labour =
+        getNumber("labourCost");
+
+
+    const packaging =
+        getNumber("packagingCost");
+
+
+    const transport =
+        getNumber("transportCost");
+
+
+    const other =
+        getNumber("otherCost");
+
+
+    const total =
+        material +
+        printing +
+        labour +
+        packaging +
+        transport +
+        other;
+
+
+    const perPiece =
+        quantity > 0
+            ? total / quantity
+            : 0;
+
+
+    document.getElementById(
+        "totalProductionCost"
+    ).innerText =
+        "৳" + total.toFixed(2);
+
+
+    document.getElementById(
+        "summaryQuantity"
+    ).innerText =
+        quantity;
+
+
+    document.getElementById(
+        "costPerPiece"
+    ).innerText =
+        "৳" + perPiece.toFixed(2);
+
+}
+
+
+/* =====================================================
+   SAVE PRODUCTION
+===================================================== */
+
+async function saveProduction() {
+
+    const message =
+        document.getElementById(
+            "productionMessage"
+        );
+
+    const button =
+        document.getElementById(
+            "saveProductionButton"
+        );
+
+
+    const productId =
+        document.getElementById(
+            "productionProduct"
+        ).value;
+
+
+    const quantity =
+        getNumber(
+            "productionQuantity"
+        );
+
+
+    const productionDate =
+        document.getElementById(
+            "productionDate"
+        ).value;
+
+
+    const materialCost =
+        getNumber("materialCost");
+
+
+    const printingCost =
+        getNumber("printingCost");
+
+
+    const labourCost =
+        getNumber("labourCost");
+
+
+    const packagingCost =
+        getNumber("packagingCost");
+
+
+    const transportCost =
+        getNumber("transportCost");
+
+
+    const otherCost =
+        getNumber("otherCost");
+
+
+    const totalCost =
+        materialCost +
+        printingCost +
+        labourCost +
+        packagingCost +
+        transportCost +
+        otherCost;
+
+
+    const costPerPiece =
+        quantity > 0
+            ? totalCost / quantity
+            : 0;
+
+
+    /* =========================
+       VALIDATION
+    ========================= */
+
+    if (!productId) {
+
+        message.innerText =
+            "Product select করুন।";
+
+        return;
+
+    }
+
+
+    if (quantity <= 0) {
+
+        message.innerText =
+            "Production Quantity দিন।";
+
+        return;
+
+    }
+
+
+    if (!productionDate) {
+
+        message.innerText =
+            "Production Date দিন।";
+
+        return;
+
+    }
+
+
+    /* =========================
+       USER
+    ========================= */
+
+    const { data: sessionData } =
+        await supabaseClient.auth.getSession();
+
+
+    const user =
+        sessionData.session
+            ? sessionData.session.user
+            : null;
+
+
+    if (!user) {
+
+        message.innerText =
+            "Please login first.";
+
+        return;
+
+    }
+
+
+    button.disabled = true;
+
+    message.innerText =
+        "Saving production...";
+
+
+    /* =========================
+       CREATE PRODUCTION BATCH
+    ========================= */
+
+    const { data: batchData, error: batchError } =
+        await supabaseClient
+            .from("production_batches")
+            .insert({
+
+                product_id: productId,
+
+                quantity: quantity,
+
+                production_date: productionDate,
+
+                total_cost: totalCost,
+
+                cost_per_piece: costPerPiece,
+
+                user_id: user.id
+
+            })
+            .select()
+            .single();
+
+
+    if (batchError) {
+
+        console.error(
+            "Production Batch Error:",
+            batchError
+        );
+
+        message.innerText =
+            "Production Error: " +
+            batchError.message;
+
+        button.disabled = false;
+
+        return;
+
+    }
+
+
+    /* =========================
+       SAVE PRODUCTION COSTS
+    ========================= */
+
+    const { error: costError } =
+        await supabaseClient
+            .from("production_costs")
+            .insert({
+
+                production_batch_id:
+                    batchData.id,
+
+                material_cost:
+                    materialCost,
+
+                printing_cost:
+                    printingCost,
+
+                labor_cost:
+                    labourCost,
+
+                packaging_cost:
+                    packagingCost,
+
+                transport_cost:
+                    transportCost,
+
+                other_cost:
+                    otherCost,
+
+                user_id:
+                    user.id
+
+            });
+
+
+    if (costError) {
+
+        console.error(
+            "Production Cost Error:",
+            costError
+        );
+
+
+        message.innerText =
+            "Cost save Error: " +
+            costError.message;
+
+
+        button.disabled = false;
+
+        return;
+
+    }
+
+
+    /* =========================
+       GET CURRENT STOCK
+    ========================= */
+
+    const { data: productData, error: productError } =
+        await supabaseClient
+            .from("products")
+            .select("current_stock")
+            .eq("id", productId)
+            .single();
+
+
+    if (productError) {
+
+        console.error(
+            "Product Stock Error:",
+            productError
+        );
+
+        message.innerText =
+            "Stock update-এর আগে product পাওয়া যায়নি।";
+
+        button.disabled = false;
+
+        return;
+
+    }
+
+
+    const currentStock =
+        Number(productData.current_stock || 0);
+
+
+    const newStock =
+        currentStock + quantity;
+
+
+    /* =========================
+       UPDATE STOCK
+    ========================= */
+
+    const { error: stockError } =
+        await supabaseClient
+            .from("products")
+            .update({
+
+                current_stock:
+                    newStock
+
+            })
+            .eq("id", productId);
+
+
+    if (stockError) {
+
+        console.error(
+            "Stock Update Error:",
+            stockError
+        );
+
+        message.innerText =
+            "Production save হয়েছে, কিন্তু stock update হয়নি: " +
+            stockError.message;
+
+        button.disabled = false;
+
+        return;
+
+    }
+
+
+    /* =========================
+       SUCCESS
+    ========================= */
+
+    message.innerText =
+        "Production saved successfully! Stock updated.";
+
+
+    /* =========================
+       CLEAR FORM
+    ========================= */
+
+    document.getElementById(
+        "productionProduct"
+    ).value = "";
+
+
+    document.getElementById(
+        "productionQuantity"
+    ).value = "";
+
+
+    document.getElementById(
+        "materialCost"
+    ).value = "";
+
+
+    document.getElementById(
+        "printingCost"
+    ).value = "";
+
+
+    document.getElementById(
+        "labourCost"
+    ).value = "";
+
+
+    document.getElementById(
+        "packagingCost"
+    ).value = "";
+
+
+    document.getElementById(
+        "transportCost"
+    ).value = "";
+
+
+    document.getElementById(
+        "otherCost"
+    ).value = "";
+
+
+    updateProductionCalculation();
+
+
+    button.disabled = false;
+
+
+    /* =========================
+       RELOAD
+    ========================= */
+
+    await loadProductionHistory();
+
+    await loadProducts();
+
+}
+
+
+/* =====================================================
+   LOAD PRODUCTION HISTORY
+===================================================== */
+
+async function loadProductionHistory() {
+
+    const list =
+        document.getElementById(
+            "productionList"
+        );
+
+
+    if (!list) {
+        return;
+    }
+
+
+    list.innerHTML =
+        '<div class="empty">Loading production...</div>';
+
+
+    const { data, error } =
+        await supabaseClient
+            .from("production_batches")
+            .select(`
+                id,
+                product_id,
+                quantity,
+                production_date,
+                total_cost,
+                cost_per_piece,
+                created_at,
+                products (
+                    product_name,
+                    unit
+                )
+            `)
+            .order(
+                "production_date",
+                {
+                    ascending: false
+                }
+            );
+
+
+    if (error) {
+
+        console.error(
+            "Production History Error:",
+            error
+        );
+
+        list.innerHTML =
+            '<div class="empty">Production history load করতে সমস্যা হয়েছে.</div>';
+
+        return;
+
+    }
+
+
+    if (!data || data.length === 0) {
+
+        list.innerHTML =
+            '<div class="empty">No production recorded yet.</div>';
+
+        return;
+
+    }
+
+
+    list.innerHTML =
+        data.map(function(batch) {
+
+            const productName =
+                batch.products
+                    ? batch.products.product_name
+                    : "Unknown Product";
+
+
+            const unit =
+                batch.products
+                    ? batch.products.unit || "Piece"
+                    : "Piece";
+
+
+            return `
+
+                <div class="production-item">
+
+                    <div class="production-top">
+
+                        <div>
+
+                            <div class="production-product">
+                                ${escapeHTML(productName)}
+                            </div>
+
+                            <div class="production-date">
+                                ${escapeHTML(batch.production_date)}
+                            </div>
+
+                        </div>
+
+                        <div>
+                            <strong>
+                                ${Number(batch.quantity).toLocaleString()}
+                            </strong>
+                            ${escapeHTML(unit)}
+                        </div>
+
+                    </div>
+
+
+                    <div class="production-details">
+
+                        <span>
+                            Total Cost:
+                            <strong>
+                                ৳${Number(batch.total_cost || 0).toFixed(2)}
+                            </strong>
+                        </span>
+
+                        <span>
+                            Cost/Piece:
+                            <strong>
+                                ৳${Number(batch.cost_per_piece || 0).toFixed(2)}
+                            </strong>
+                        </span>
+
+                    </div>
+
+
+                    <div class="production-total">
+
+                        Production Batch ID:
+                        ${escapeHTML(String(batch.id))}
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }).join("");
+
+}
+
 
 /* =====================================================
    SAFE TEXT
@@ -1829,7 +2718,6 @@ function escapeHTML(value) {
 }
 
 
-
 /* =====================================================
    START APP
 ===================================================== */
@@ -1838,7 +2726,6 @@ checkLogin();
 
 
 </script>
-
 
 </body>
 
