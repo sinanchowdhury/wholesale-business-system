@@ -448,5 +448,145 @@
 
     testSupabaseConnection();
 </script>
+    <!-- LOGIN SYSTEM -->
+
+<div id="authScreen" style="
+position:fixed;
+inset:0;
+background:#f5f7fb;
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:9999;
+">
+
+<div style="
+width:350px;
+background:white;
+padding:30px;
+border-radius:15px;
+box-shadow:0 10px 30px rgba(0,0,0,0.12);
+">
+
+<h2 id="authTitle" style="text-align:center;">Login</h2>
+
+<input id="authEmail"
+type="email"
+placeholder="Email"
+style="width:100%;padding:12px;margin:8px 0;box-sizing:border-box;">
+
+<input id="authPassword"
+type="password"
+placeholder="Password"
+style="width:100%;padding:12px;margin:8px 0;box-sizing:border-box;">
+
+<button onclick="handleAuth()"
+style="width:100%;padding:12px;margin-top:10px;">
+<span id="authButtonText">Login</span>
+</button>
+
+<p id="authMessage" style="text-align:center;"></p>
+
+<p style="text-align:center;">
+<span id="authSwitchText">Don't have an account?</span>
+
+<button onclick="switchAuthMode()"
+style="border:none;background:none;color:#2563eb;">
+<span id="authSwitchButton">Sign Up</span>
+</button>
+</p>
+
+</div>
+</div>
+
+<script>
+
+let authMode = "login";
+
+function switchAuthMode() {
+
+    if (authMode === "login") {
+
+        authMode = "signup";
+
+        document.getElementById("authTitle").innerText = "Create Account";
+        document.getElementById("authButtonText").innerText = "Sign Up";
+        document.getElementById("authSwitchText").innerText =
+            "Already have an account?";
+        document.getElementById("authSwitchButton").innerText = "Login";
+
+    } else {
+
+        authMode = "login";
+
+        document.getElementById("authTitle").innerText = "Login";
+        document.getElementById("authButtonText").innerText = "Login";
+        document.getElementById("authSwitchText").innerText =
+            "Don't have an account?";
+        document.getElementById("authSwitchButton").innerText = "Sign Up";
+    }
+}
+
+async function handleAuth() {
+
+    const email = document.getElementById("authEmail").value.trim();
+    const password = document.getElementById("authPassword").value;
+    const message = document.getElementById("authMessage");
+
+    if (!email || !password) {
+        message.innerText = "Email এবং Password দিন।";
+        return;
+    }
+
+    message.innerText = "Please wait...";
+
+    if (authMode === "signup") {
+
+        const { error } = await supabaseClient.auth.signUp({
+            email: email,
+            password: password
+        });
+
+        if (error) {
+            message.innerText = error.message;
+            return;
+        }
+
+        message.innerText =
+            "Account তৈরি হয়েছে। Email verify করুন।";
+
+    } else {
+
+        const { error } =
+            await supabaseClient.auth.signInWithPassword({
+                email: email,
+                password: password
+            });
+
+        if (error) {
+            message.innerText = error.message;
+            return;
+        }
+
+        message.innerText = "Login successful!";
+
+        setTimeout(() => {
+            document.getElementById("authScreen").style.display = "none";
+        }, 500);
+    }
+}
+
+async function checkLogin() {
+
+    const { data } = await supabaseClient.auth.getSession();
+
+    if (data.session) {
+        document.getElementById("authScreen").style.display = "none";
+    }
+}
+
+checkLogin();
+
+</script>
 </body>
 </html>
